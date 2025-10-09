@@ -1,0 +1,62 @@
+% -------------------------------
+% Shared packages and commands
+% -------------------------------
+
+% --- Page size & margins ---
+\usepackage[a4paper,top=2cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
+
+% --- Title formatting ---
+\usepackage{titling}
+
+% Move the whole title block up
+\setlength{\droptitle}{-2em}
+
+% Keep author and date on their own lines, just reduce the gaps
+\pretitle{\begin{center}\large\bfseries}%
+\posttitle{\par\end{center}\vspace{-1em}} % space after title
+\preauthor{\begin{center}\large}%
+\postauthor{\par\end{center}\vspace{-1em}} % space after author
+\predate{\begin{center}\small}%
+\postdate{\par\end{center}\vspace{-1em}} % space after date block
+
+% --- Code listings setup ---
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  breaklines=true,
+  frame=single,
+  columns=fullflexible
+}
+
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{1.2ex plus .2ex minus .2ex}{0.8ex plus .1ex}
+\titlespacing*{\subsection}{0pt}{1ex plus .2ex minus .2ex}{0.5ex plus .1ex}
+
+
+% --- Math & theorem environments ---
+\usepackage{amsmath, amssymb, amsthm}
+
+% --- Graphics & tables ---
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% --- Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue
+}
+
+% --- Optional: underlined hyperlinks (remove if not desired) ---
+% \usepackage[normalem]{ulem}
+% \renewcommand\UrlFont{\uline}
+
+% --- Custom macros (add your own below) ---
+% \newcommand{\R}{\mathbb{R}}

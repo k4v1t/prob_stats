@@ -1,0 +1,29 @@
+# Ignore all LaTeX build files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.run.xml
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp
+*.synctex*
+
+# Keep only .tex and .pdf files
+!*.tex
+!*.pdf
