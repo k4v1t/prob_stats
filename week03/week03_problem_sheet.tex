@@ -165,23 +165,52 @@ and that $\mathbb{P}(A \mid B) > \mathbb{P}(A)$.
 \end{solution}
 
 \begin{problem}
-Let $T$ be the random variable giving the time (in minutes) between consecutive 
-customers arriving in a shop. Suppose that $T \sim $ Exp(0.5). Each customer spends
-5 minutes in the shop and then leaves. The first customer of the day has just 
-entered the shop. 
 \begin{enumerate}
-      \item How do your answers to (c) and (d) change if the parameter of $T$ changes?
+      \item Suppose that $T$ is a discrete random variable measuring the number 
+            of days until some event happens. We say that $T$ has a Geometric($p$) 
+            distribution if it takes values in 1, 2, 3, ... and the pmf is 
+            $\mathbb{P}(T = k) = p \, (1 - p)^{k-1}$.
+            \begin{enumerate}[label=(\roman*)]
+                  \item What is $\mathbb{P}(T > k)$?
+                  \item Show that for any $a, k \in \mathbb{N}$, we have 
+                        $\mathbb{P}(T > a + k \mid T > a) = \mathbb{P}(T > k)$. 
+            \end{enumerate}
+      \item Suppose that the lifetime of a component is a continuous random variable 
+            $V$ which follows an Exponential distribution with parameter $\lambda$.
+            \begin{enumerate}[label=(\roman*)]
+                  \item What is $\mathbb{P}(V > k)$?
+                  \item Show that for any $a, k \in \mathbb{R}$, we have 
+                        $\mathbb{P}(V > a + k \mid V > a) = \mathbb{P}(V > k)$. 
+            \end{enumerate}
 \end{enumerate}
 \end{problem}
 
 \begin{solution}
 \begin{enumerate}
-      \item We are looking for the probability that $T > 5$:
-            \[
-            \mathbb{P}(T > 5) = 1 - \mathbb{P}(T \le 5)
-            = 1 - F_T(5) = 1 - (1 - e^{-\lambda(5)}) = e^{(-2.5)} = 0.08
-            \]
-      \item $\mathbb{E}(T) = 1 / \lambda = 1 / 0.5 = 2$
+      \item \begin{enumerate}[label=(\roman*)]
+            \item Given we have the pmf of $T$ defined, we can work out the cdf:
+                  \[
+                  F_T(k) = \mathbb{P}(T \le k) = \sum_{i=1}^{k}{p \, (1 - p)^{i - 1}}
+                        = p \sum_{j=0}^{k-1}{(1 - p)^{j}} = \frac{p \, (1 - (1 - p)^{k})}
+                        {1 - (1 - p)} = {1 - (1 - p)^{k}}
+                  \]
+                  Using this cdf, we can then work out $\mathbb{P}(T > k)$:
+                  \[
+                  \mathbb{P}(T > k) = 1 - \mathbb{P}(T \le k) = 1 - F_T(k) = 
+                        1 - \left({1 - (1 - p)^{k}}\right) = {(1 - p)^{k}}
+                  \]
+            \item We can show this as follows:
+                  \[
+                  \mathbb{P}(T > a + k \mid T > a) = \frac{\mathbb{P}(T > a + k
+                        \, \cap \, T > a)}{\mathbb{P}(T > a)}
+                        = \frac{\mathbb{P}(T > a + k)}{\mathbb{P}(T > a)}
+                        = \frac{(1 - p)^{a + k}}{(1 - p)^{a}} = {(1 - p)^k}
+                  \]
+                  Which is the same as $\mathbb{P}(T > k)$.
+            \end{enumerate}
+      \item \begin{enumerate}[label=(\roman*)]
+            \item 
+            \end{enumerate}
 \end{enumerate}
 \end{solution}
 
@@ -202,7 +231,7 @@ Read this article from mathematical epidemiologist Adam Kucharski's blog: \\
 
 \begin{solution}
 \begin{enumerate}
-      \item If the probability of the unusual even is $p$, then let us define $E$ 
+      \item If the probability of the unusual event is $p$, then let us define $E$ 
             as the event occurring and $F$ as it being flagged by the LLM. Then,
             \[
             \mathbb{P}(E \mid F) = \frac{\mathbb{P}(F \mid E) \, \mathbb{P}(E)}
@@ -215,13 +244,31 @@ Read this article from mathematical epidemiologist Adam Kucharski's blog: \\
             \centering
             \begin{tabular}{lccccccccc}
             \toprule
-            p & 0.1\% & 1.0\% & 10.0\% \\
+            $p$ (\%) & 0.1 & 1.0 & 10.0 & 25.0 & 50.0 & 75.0 & 90.0 & 99.0 & 99.9 \\
             \midrule
-            $\mathbb{P}(E \mid F)$ & 0.01 & 0.01 & 1.00 \\
+            $\mathbb{P}(E \mid F)$ (\%) & 9.016 & 50.000 & 91.667 & 97.059 & 99.000 & 99.664 & 99.888 & 99.990 & 99.999 \\
             \bottomrule
             \end{tabular}
             \caption{How $p$ impacts the flag being correct.}
-            \end{table}            
+            \end{table}
+            Two things worth mentioning from this table:
+            \begin{itemize}
+                  \item Unless $p$ exceeds 1\%, most flags will be 
+                        false alarms! And this is with an optimistic hallucination 
+                        rate of 1\%.
+                  \item We would need a $p$ of greater than 50\% to have a 99\%
+                        confidence that a flag was real. 
+            \end{itemize}
+            One way to get a high confidence with a low $p$ would be to have 
+            multiple independent LLMs being used for flagging an event. However, 
+            this relies on the assumption that their hallucinations are uncorrelated. 
+            This might not be the case if they share similar architecture or 
+            training data.
+      \item Yes, I think the author did a very good job at translating Bayesian 
+            statistics into non-mathematical language. They explained the scenario 
+            clearly, provided their reasoning for every step and highlighted the 
+            pitfalls of using just accuracy as a measure of model performance. 
+      \item Done!
 \end{enumerate}
 \end{solution}
 
