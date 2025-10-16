@@ -184,6 +184,9 @@ and that $\mathbb{P}(A \mid B) > \mathbb{P}(A)$.
                   \item Show that for any $a, k \in \mathbb{R}$, we have 
                         $\mathbb{P}(V > a + k \mid V > a) = \mathbb{P}(V > k)$. 
             \end{enumerate}
+      \item Why do you think the results in parts (a)(ii) and (b)(ii) are 
+            sometimes called the \textit{memoryless property} of the Geometric 
+            and Exponential distributions?
 \end{enumerate}
 \end{problem}
 
@@ -219,10 +222,27 @@ and that $\mathbb{P}(A \mid B) > \mathbb{P}(A)$.
                         1 - (1 - e^{-\lambda k}) = e^{-\lambda k} \text{ for } k 
                         \ge 0 \text{ and 1 otherwise}
                   \]
-            \item 
+            \item The proof below is for cases when $a \ge 0$ and $k \ge 0$. If 
+                  either $a < 0$ or $k < 0$, then the conditional probability is 
+                  trivial.
+                  \[
+                  \mathbb{P}(V > a + k \mid V > a) = \frac{\mathbb{P}(V > a + k
+                        \, \cap \, V > a)}{\mathbb{P}(V > a)}
+                        = \frac{\mathbb{P}(V > a + k)}{\mathbb{P}(V > a)}
+                        = \frac{e^{-\lambda(a + k)}}{e^{-\lambda a}} = 
+                        {e^{-\lambda k}}
+                  \]
+                  Which is the same as $\mathbb{P}(V > k)$.
+            \item This is called the \textit{memoryless property} because the 
+                  probability of waiting an additional amount of time does not 
+                  depend on how much time has already passed. So, the distribution 
+                  has no ``memory" of the past and the process ``restarts" at 
+                  each point in time.
             \end{enumerate}
 \end{enumerate}
 \end{solution}
+
+\newpage
 
 \begin{problem}
 Read this article from mathematical epidemiologist Adam Kucharski's blog: \\
