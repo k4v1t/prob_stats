@@ -164,6 +164,8 @@ and that $\mathbb{P}(A \mid B) > \mathbb{P}(A)$.
 \end{enumerate}
 \end{solution}
 
+\newpage
+
 \begin{problem}
 \begin{enumerate}
       \item Suppose that $T$ is a discrete random variable measuring the number 
@@ -209,6 +211,14 @@ and that $\mathbb{P}(A \mid B) > \mathbb{P}(A)$.
                   Which is the same as $\mathbb{P}(T > k)$.
             \end{enumerate}
       \item \begin{enumerate}[label=(\roman*)]
+            \item The cdf of an Exponential distribution with parameter $\lambda$ 
+                  is given by $1 - e^{-\lambda k}$ for $k \ge$ 0 and 0 otherwise.
+                  Given this, we then have:
+                  \[
+                  \mathbb{P}(V > k) = 1 - \mathbb{P}(V \le k) = 1 - F_V(k) = 
+                        1 - (1 - e^{-\lambda k}) = e^{-\lambda k} \text{ for } k 
+                        \ge 0 \text{ and 1 otherwise}
+                  \]
             \item 
             \end{enumerate}
 \end{enumerate}
