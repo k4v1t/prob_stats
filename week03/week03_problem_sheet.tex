@@ -1,9 +1,9 @@
 \documentclass[11pt]{article}
 \input{../tex/preamble}
 
-\title{MTH794P Probability and Statistics for Data Analytics — Problem Sheet 2}
+\title{MTH794P Probability and Statistics for Data Analytics — Problem Sheet 3}
 \author{Kavit Tolia} 
-\date{October 9, 2025}
+\date{October 16, 2025}
 
 \usepackage{fancyhdr}
 \usepackage{lastpage}
@@ -38,177 +38,129 @@
 
 % ---------- Example problems ----------
 \begin{problem}
-A continuous random variable $X$ has pdf of the form:
-      \[
-      f_{X}(x) = 
-      \begin{cases}
-      0 & \text{if } x < \frac{1}{2}, \\
-      \frac{C}{x^2}  & \text{if } x \ge \frac{1}{2}
-      \end{cases}
-      \]
-      for some constant \textit{C}.
+I have three coins in my pocket. Two of them are ordinary fair coins, the third 
+has Heads on both sides.
 \begin{enumerate}
-      \item What is the value of \textit{C}?
-      \item What is $f_{X}(\frac{1}{2})$?
-      \item Find the cdf of X.
-      \item Write down a couple of ways you could check your answer to (c)
-            is plausible. Perform those checks and revisit your answer to (c)
-            if necessary.
-      \item How would you calculate $\mathbb{P}(1<X<3)$ using the cdf?
-      \item How would you calculate $\mathbb{P}(1<X<3)$ using the pdf?
+      \item I take a random coin from my pocket and toss it. What is the probability 
+            that it comes up Heads?
+      \item Given that it did come up Heads, what is the conditional probability 
+            that it is the double-headed coin?
+      \item Given that it did come up Heads, what is the conditional probability 
+            that a second toss of the same coin also comes up Heads?
+      \item Given that two tosses of the same coin both come up Heads, what is 
+            the conditional probability that it is the double-headed coin? [Before 
+            doing this think do you expect the answer to be larger or smaller than 
+            the answer to part (b)? Why?]
+      \item Suppose that 100 tosses of the same coin show a Head every time. 
+            Without doing any more calculations, say roughly what you expect the 
+            conditional probability that it is the double-headed coin to be? How 
+            would you explain this in non-mathematical terms?
 \end{enumerate}
 \end{problem}
 
 \begin{solution}
 \begin{enumerate}
-      \item For $f_{X}(x)$ to be a pdf, we need:
+      \item Let $\mathbb{P}(H)$ be the probability of the coin showing Heads, 
+            $\mathbb{P}(F)$ be the probability that it is a fair coin and 
+            $\mathbb{P}(B)$ be the probability that it is a biased coin. Then, 
             \[
-            \int_{-\infty}^{\infty} f_{X}(x)\,dx = 1
-            \Rightarrow \int_{\frac{1}{2}}^{\infty} \frac{C}{x^2}\,dx = 1
-            \Rightarrow \left[-\frac{C}{x}\right]_{x=\tfrac{1}{2}}^{\infty} = 1
-            \Rightarrow C = \frac{1}{2}
+            \mathbb{P}(H) = \mathbb{P}(H \mid F) \, \mathbb{P}(F) + 
+                              \mathbb{P}(H \mid B) \, \mathbb{P}(B)
+                          = \left(\frac{1}{2}\right) \left(\frac{2}{3}\right)
+                              + \left(1\right) \left(\frac{1}{3}\right)
+                          = \frac{2}{3}
             \]
-      \item $f_{X}(\frac{1}{2}) = \frac{\frac{1}{2}}{(\frac{1}{2})^2} = 2$
-      \item Let us define the cdf of X as $F_X(x)$, then we have:
+      \item Now we want to work out $\mathbb{P}(B|H)$:
             \[
-            F_x(x) = \int_{-\infty}^{x} f_{X}(t)\,dt
-            = \int_{-\infty}^{x} \frac{1}{2t^2}\,dt
-            = \left[-\frac{1}{2t}\right]_{t=\frac{1}{2}}^{x}
-            = 1 - \frac{1}{2x}
+            \mathbb{P}(B \mid H) = \frac{\mathbb{P}(H \mid B) \mathbb{P}(B)}{\mathbb{P}(H)}
+                        = \frac{\left(1\right) \left(\frac{1}{3}\right)}
+                              {\frac{2}{3}}
+                        = \frac{1}{2}
             \]
-            So, we have:
+      \item Now let's say $H_i$ is the $i^{th}$ toss, then we want to calculate 
+            $\mathbb{P}(H_2 = H \mid H_1 = H)$:
             \[
-            F_{X}(x) = 
-            \begin{cases}
-            0 & \text{if } x < \frac{1}{2}, \\
-            1 - \frac{1}{2x}  & \text{if } x \ge \frac{1}{2}
-            \end{cases}
-            \]            
-      \item To check that the cdf is valid, we can do the following checks:
-            \begin{itemize}
-            \item Non-decreasing: We can see that as $x \ge \frac{1}{2}$ increases, $\frac{1}{2x}$
-                  decreases. This means $F_X(x)$ increases as it is negatively linked
-                  to $\frac{1}{2x}$. So the function is indeed non-decreasing.
-            \item Limits at infinity: It's clear that $\lim_{x \to -\infty}F_X(x)=0$ due to
-                  how the function is defined. As for the other side, as $x$ approaches infinity
-                  we have $\frac{1}{2x}$ approaching 0, and so $F_X(x)$ approaching 1.
-            \end{itemize}
-      \item We can calculate $\mathbb{P}(1<X<3)$ using the cdf as follows:
-            \[
-            \mathbb{P}(1<X<3) = \mathbb{P}(X \le 3) - \mathbb{P}(X \le 1)
-            = F_X(3) - F_X(1) = 1 - \frac{1}{2(3)} - 1 + \frac{1}{2(1)} 
-            = \frac{1}{3}
+            \mathbb{P}(H_2 = H \mid H_1 = H) = \frac{\mathbb{P}(H_2 = H \cap H_1 = H)}
+                        {\mathbb{P}(H_1 = H)} = \frac{\frac{1}{2}}{\frac{2}{3}}
+                        = \frac{3}{4}
             \]
-      \item If we wanted to do the same thing using a pdf, we can do it by integrating it:
+      \item I expect this probability to be higher than (b), as I'm more certain 
+            of the fact that it is now a baised coin.
             \[
-            \mathbb{P}(1<X<3) = \mathbb{P}(1 \le X \le 3) 
-            = \int_{1}^{3} f_{X}(x)\,dx = \int_{1}^{3} \frac{1}{2x^2}\,dx
-            = \left[-\frac{1}{2x}\right]_{x=1}^{3}
-            = -\frac{1}{6} + \frac{1}{2} = \frac{1}{3}
+            \mathbb{P}(B \mid HH) = \frac{\mathbb{P}(HH \mid B) \mathbb{P}(B)}{\mathbb{P}(HH)}
+                        = \frac{\left(1\right) \left(\frac{1}{3}\right)}
+                              {\frac{1}{2}} = \frac{2}{3}
             \]
+      \item I would expect this conditional probability to be close to 1, as it 
+            is highly unlikely that the coin is a fair coin. If it was a fair coin, 
+            the chances of getting 100 Heads in a row is close to impossible. The 
+            only plausible explanation is that it is the double-headed coin. 
 \end{enumerate}
 \end{solution}
 
 \begin{problem}
-A continuous random variable $X$ has cdf
-      \[
-      F_{X}(x) = 
-      \begin{cases}
-      0 & \text{if } x < 0, \\
-      \frac{x}{6}  & \text{if } 0 \le x < 3, \\
-      \frac{1}{2} & \text{if } 3 \le x < 4, \\
-      \frac{x-2}{4} & \text{if } 4 \le x < 6, \\
-      1 & \text{if } x \ge 6
-      \end{cases}
-      \]
+A certain medical condition affect 1\% of the population. A new AI tool for detecting 
+this condition from a scan has been developed. It has a 95\% success rate at 
+correctly detecting that a person with the condition has it, and only a 2\% chance 
+of incorrectly deciding that a healthy person has the condition. A randomly chosen 
+person from the population undertakes this test and the test shows positive.
 \begin{enumerate}
-      \item Find the pdf of $X$.
-      \item Write down the expressions for $\mathbb{E}(X)$ and Var($X$) and compute them.
-      \item Describe the distribution this random variable follows in words in a way 
-            that would make sense to a non-mathematician.
+      \item What is the probability that they do have the condition?
+      \item A politician suggests that this test could be used for a national 
+            screening programme. What insight into the possible disadvantages of 
+            doing this does the calculation of part (a) provide? How could these 
+            disadvantages be mitigated?
 \end{enumerate}
 \end{problem}
 
 \begin{solution}
 \begin{enumerate}
-      \item The pdf of X, $f_X(x)$ is defined as the derivative of its cdf. So, we have:
+      \item Let's define some outcomes. Let $H$ denote a person being healthy and 
+            $P$ denote a positive test result. Then,
             \[
-            f_{X}(x) = 
-            \begin{cases}
-            \frac{1}{6}  & \text{if } 0 \le x < 3, \\
-            \frac{1}{4} & \text{if } 4 \le x < 6, \\
-            0 & \text{if } x<0, \, 3 \le x < 4, \, \text{or} \, x \ge 6
-            \end{cases}
+            \mathbb{P}(H^{c} \mid P) = \frac{\mathbb{P}(P \mid H^{c})\mathbb{P}(H^{c})}
+                  {\mathbb{P}(P)} = \frac{\left(95\%\right)\left(1\%\right)}
+                  {\left(95\%\right)\left(1\%\right) + \left(2\%\right)\left(99\%\right)}
+                  = 32.5\%
             \]
-      \item The expectation of $X$ is defined as follows:
-            \[
-            \mathbb{E}(X) = \int_{-\infty}^{\infty}xf_X(x)\,dx
-            = \int_{0}^{3} \frac{x}{6}\,dx + \int_{4}^{6} \frac{x}{4}\,dx
-            = \left[\frac{x^2}{12}\right]_{x=0}^{3} + 
-                  \left[\frac{x^2}{8}\right]_{x=4}^{6}
-            = \frac{9}{12} + \frac{36}{8} - \frac{16}{8} = 3.25
-            \]
-            The variance of $X$ is defined as Var($X$) = $\mathbb{E}(X^2) - 
-            \mathbb{E}(X)^2$. We already have $\mathbb{E}(X)$, so we just need 
-            to work out $\mathbb{E}(X)^2$:
-            \[
-            \mathbb{E}(X^2) = \int_{-\infty}^{\infty}{x^2}f_X(x)\,dx
-            = \int_{0}^{3} \frac{x^2}{6}\,dx + \int_{4}^{6} \frac{x^2}{4}\,dx
-            = \left[\frac{x^3}{18}\right]_{x=0}^{3} + 
-                  \left[\frac{x^3}{12}\right]_{x=4}^{6}
-            = \frac{27}{18} + \frac{216}{12} - \frac{64}{12} = 14.17
-            \]
-            This means we have the following for Var($X$):
-            \[
-            \text{Var($X$)} = \mathbb{E}(X^2) - \mathbb{E}(X)^2
-            = 14.17 - (3.25)^2 = 3.60
-            \]
-      \item Let's assume $X$ is the waiting time (in minutes) for a bus. \\
-            The bus never arrives before 0 minutes or after 6 minutes, and there 
-            is a gap between 3 and 4 minutes where it never comes too.
+      \item There is a major disadvantage here in that you have less than 1 in 3 
+            chance of a person actually having the condition if they tested 
+            positive. This seems odd given the test's high accuracy. But this 
+            happens due to the low rate of the condition in the general population. 
+            
+            We can mitigate this by either: 
             \begin{itemize}
-            \item The bus arrives half the time in the interval between 0 to 3 minutes, 
-                  with all times in that range being equally likely
-            \item The other half of the time, the bus arrives between 4 and 6 minutes,
-                  where all times are equally likely too
+                  \item We can use the test as a first screen, followed by more robust 
+                        tests for those who are positive.
+                  \item Only screen high-risk groups, where we know the prevalence to be 
+                        higher, significantly increasing the probability that a positive 
+                        test is indeed someone with the condition.
             \end{itemize}
 \end{enumerate}
 \end{solution}
 
 \begin{problem}
-The number $m \in \mathbb{R}$ is a \textit{median} for the random variable $X$ if
-$F_X(m) = \frac{1}{2}$.
+Suppose that $A$ and $B$ are events with $\mathbb{P}(A) >$ 0 and $\mathbb{P}(B)>$ 0 
+and that $\mathbb{P}(A \mid B) > \mathbb{P}(A)$.
 \begin{enumerate}
-      \item Indicate why every continuous random variable has a median. [This can be
-            an informal explanation rather than a rigorous mathematical proof, 
-            although if you know some analysis you could try to write a proof.]
-      \item Can you say anything about $f_X(m)$ (i.e. the pdf evaluated at $m$)?
+      \item What can you say about $\mathbb{P}(B \mid A)$?
+      \item How do you explain the relationship between events $A$ and $B$ which 
+            satisfy this property in non-mathematical language?
 \end{enumerate}
 \end{problem}
 
 \begin{solution}
 \begin{enumerate}
-      \item The intuitive explanation here can be as follows: \\
-            \textit{
-            Given the cdf of $X$ is a function which tells us the probability 
-            of $X$ being less than a certain value, there will always be a value
-            at which point the probability of being less than that value is exactly
-            equal to $\frac{1}{2}$. If this was not the case, then the $X$ is not 
-            a continuous random variable.
-            } \\
-            \\
-            In terms of a mathematical proof, $F_X(x)$ is a continuous function 
-            in the interval [0, 1] (as it is a cdf). We can then use the \textit{
-            Intermediate Value Theorem}, which states that if a function $f$ is 
-            continuous in the interval [a, b], then for any value $k$ between 
-            $f(a)$ and $f(b)$, there much be at least one value $c$ in the 
-            interval (a, b) such that $f(c) = k$. In our case, we have $F_X(x)$ which
-            is continuous everywhere, so there will be a number $m \in \mathbb{R}$ 
-            such that $F_X(m) = k$, where $k = \frac{1}{2}$.
-      \item Given any continuous random variable will have a median, that means it
-            is agnostic of the type of distribution followed by $X$. It could be a 
-            uniform distribution, normal distribution, or any other type. All this 
-            means we cannot really say much about the value of the pdf at $m$.
+      \item Let us write this out:
+            \[
+            \mathbb{P}(B \mid A) = \frac{\mathbb{P}(A \mid B) \mathbb{P}(B)}
+                  {\mathbb{P}(A)} > \frac{\mathbb{P}(A) \mathbb{P}(B)}
+                  {\mathbb{P}(A)} = \mathbb{P}(B)
+            \]
+            So, we have $\mathbb{P}(B \mid A) > \mathbb{P}(B)$
+      \item This tells us that the occurance of one event makes the other more 
+            likely to happen. In laymen's terms, $A$ and $B$ are positively
+            linked, as they occur together more often.
 \end{enumerate}
 \end{solution}
 
@@ -218,13 +170,6 @@ customers arriving in a shop. Suppose that $T \sim $ Exp(0.5). Each customer spe
 5 minutes in the shop and then leaves. The first customer of the day has just 
 entered the shop. 
 \begin{enumerate}
-      \item What is the probability that the next customer does not arrive until 
-            after the first customer has left?
-      \item What is the expectation of the time before the next customer arrives?
-      \item Is the median of the time before the next customer arrives smaller, 
-            larger or the same as the expectation?
-      \item What is the probability that the time before the next customer arrives
-            is greater than twice its expectation?
       \item How do your answers to (c) and (d) change if the parameter of $T$ changes?
 \end{enumerate}
 \end{problem}
@@ -237,94 +182,46 @@ entered the shop.
             = 1 - F_T(5) = 1 - (1 - e^{-\lambda(5)}) = e^{(-2.5)} = 0.08
             \]
       \item $\mathbb{E}(T) = 1 / \lambda = 1 / 0.5 = 2$
-      \item Let $m$ be the median of $T$, then we have:
-            \[
-            F_T(m) = \frac{1}{2}
-            \Rightarrow 1 - e^{-\lambda m} = \frac{1}{2}
-            \Rightarrow e^{-\lambda m} = \frac{1}{2}
-            \Rightarrow -\lambda m = \ln{\frac{1}{2}}
-            \Rightarrow m = \frac{\ln{2}}{\lambda} = \frac{\ln{2}}{0.5} = 1.39
-            \]
-            So, the median is less than the expectation, which makes sense given 
-            the shape of the cdf. This result is true for all exponential distributions
-            as $\ln{2}$ is 0.69. This means the median of an exponential distribution 
-            is always 0.69 times the expectation.
-      \item Let's work this out for a generic exponential distribution first:
-            \[
-            \mathbb{P}(T > 2 \mathbb{E}(T)) = 
-            1 - \mathbb{P}(T \le 2 \mathbb{E}(T)) = 
-            1 - F_T(2 \mathbb{E}(T)) = 
-            1 - (1 - e^{-2\lambda \mathbb{E}(T)}) = 
-            e^{-2\lambda (\frac{1}{\lambda})} = \frac{1}{e^2} = 0.14
-            \]
-            Given this derivation does not depend on $\lambda$, it is always true!
-      \item No changes to the answers.
 \end{enumerate}
 \end{solution}
 
 \begin{problem}
-Let $\Omega$ be the right-angled triangle with vertices (0,0), (1,0) and (1,1). 
-Let $a$ be a point chosen randomly from within $\Omega$ with the probability that 
-$a$ is in any fixed region being proportional to the area of the region. Let $T$ be 
-the random variable ``The angle of the line from (0,0) to $a$ makes with the $x$-axis".
-Find the cdf and pdf of $T$.
-\end{problem}
-
-\begin{solution} \\
-Given it is a right-angled triangle with the provided vertices, we know that the 
-angle between the hypotenuse and the $x$-axis is $\frac{\pi}{4}$. This means the 
-cdf of the random variable $T$ is 0 if $T < 0$ and 1 if $T > \frac{\pi}{4}$.
-Now, let's say we want to find the probability that $T \le \theta$, where 
-$0 \le \theta \le \frac{\pi}{4}$. This probability, $\mathbb{P}(T \le \theta)$, 
-is the same as the probability that $a$ is in the right-angled triangle where the 
-angle between the hypotenuse and the $x$-axis is $\theta$, which is given to be 
-proportional to the area of the right-angled triangle. The area of this right-angled
-triangle is $\frac{1}{2}bh$, where $b=1$ and $h$ can be written as 
-$\tan(\theta)$. So, the area of that sub-region becomes $\frac{1}{2}\tan(\theta)$.
-\[
-\mathbb{P}(T \le \theta) = \frac{\text{Area of sub-region}}{\text{Area of }\Omega}
-= \frac{\frac{1}{2}\tan(\theta)}{\frac{1}{2}} = \tan(\theta)
-\]
-This means the cdf can be defined as:
-\[
-F_{T}(t) = 
-\begin{cases}
-0 & \text{if } t < 0, \\
-\tan(t) & \text{if } 0 \le t \le \frac{\pi}{4}, \\
-1 & \text{if } t > \frac{\pi}{4}
-\end{cases}
-\]
-Given that the pdf is just the derivative of the cdf, we have:
-\[
-f_{T}(t) = 
-\begin{cases}
-0 & \text{if } t < 0 \text{ or } t > \frac{\pi}{4}, \\
-\sec^{2}(t) & \text{if } 0 \le t \le \frac{\pi}{4}, \\
-\end{cases}
-\]
-\end{solution}
-
-\begin{problem}
-Decide whether each of the following statements is true or false. Give a reason 
-in either case:
+Read this article from mathematical epidemiologist Adam Kucharski's blog: \\
+\texttt{https://kucharski.substack.com/p/small-hallucinations-big-problems}
 \begin{enumerate}
-      \item For any continuous random variable $X$, the values of the pdf are 
-            probabilities so $0 \le f_X(x) \le 1$ for all $x \in \mathbb{R}$.
-      \item For any continuous random variable, the median is always unique (i.e.
-            there is only one $m \in \mathbb{R}$ which satisfies the definition 
-            of median).
+      \item Using what you learn in this module, redo this analysis in the case 
+            that the probability of the unusual event we are looking for is $p$ 
+            (rather than the 1 in 1000 that the article uses).
+      \item Do you think the author did a good job at explaining the mathematics 
+            to a non-mathematical audience?
+      \item Look at the Student Forum on the module QMPlus page and make a comment 
+            (which could be about your answer to parts (a) or (b) of this question 
+            or something else) on the discussion thread about this article.
 \end{enumerate}
 \end{problem}
 
 \begin{solution}
 \begin{enumerate}
-      \item False. The pdf of a random variable does not give us probabilities. It 
-            provides us the density (can be thought of as probability per unit of $x$), 
-            which can take any non-negative value. We can see this in (a) of Problem 1.
-      \item False. You can have a constant $F_X(x)=\frac{1}{2}$ between two values, 
-            which means every value in that interval is a median. The median is only 
-            unique if the cdf $F_X(x)$ is strictly increasing (or the pdf $f_X(x)
-            > 0$ everywhere).
+      \item If the probability of the unusual even is $p$, then let us define $E$ 
+            as the event occurring and $F$ as it being flagged by the LLM. Then,
+            \[
+            \mathbb{P}(E \mid F) = \frac{\mathbb{P}(F \mid E) \, \mathbb{P}(E)}
+            {\mathbb{P}(F \mid E) \, \mathbb{P}(E) + \mathbb{P}(F \mid E^{c}) \, \mathbb{P}(E^{c})}
+            = \frac{0.99 p}{0.99p + 0.01(1-p)}
+            \]
+            We can use this formula to understand how the rarity of an event impacts 
+            the probability of a flag being correct:
+            \begin{table}[H]
+            \centering
+            \begin{tabular}{lccccccccc}
+            \toprule
+            p & 0.1\% & 1.0\% & 10.0\% \\
+            \midrule
+            $\mathbb{P}(E \mid F)$ & 0.01 & 0.01 & 1.00 \\
+            \bottomrule
+            \end{tabular}
+            \caption{How $p$ impacts the flag being correct.}
+            \end{table}            
 \end{enumerate}
 \end{solution}
 
