@@ -58,7 +58,7 @@ has Heads on both sides.
 \end{enumerate}
 \end{problem}
 
-\begin{solution}
+\begin{solution} \textcolor{red}{\textbf{TODO: Need to define events better!}}
 \begin{enumerate}
       \item Let $\mathbb{P}(H)$ be the probability of the coin showing Heads, 
             $\mathbb{P}(F)$ be the probability that it is a fair coin and 
@@ -70,9 +70,9 @@ has Heads on both sides.
                               + \left(1\right) \left(\frac{1}{3}\right)
                           = \frac{2}{3}
             \]
-      \item Now we want to work out $\mathbb{P}(B|H)$:
+      \item Now we want to work out $\mathbb{P}(B \mid H)$:
             \[
-            \mathbb{P}(B \mid H) = \frac{\mathbb{P}(H \mid B) \mathbb{P}(B)}{\mathbb{P}(H)}
+            \mathbb{P}(B \mid H) = \frac{\mathbb{P}(H \mid B) \, \mathbb{P}(B)}{\mathbb{P}(H)}
                         = \frac{\left(1\right) \left(\frac{1}{3}\right)}
                               {\frac{2}{3}}
                         = \frac{1}{2}
@@ -153,14 +153,14 @@ and that $\mathbb{P}(A \mid B) > \mathbb{P}(A)$.
 \begin{enumerate}
       \item Let us write this out:
             \[
-            \mathbb{P}(B \mid A) = \frac{\mathbb{P}(A \mid B) \mathbb{P}(B)}
-                  {\mathbb{P}(A)} > \frac{\mathbb{P}(A) \mathbb{P}(B)}
+            \mathbb{P}(B \mid A) = \frac{\mathbb{P}(A \mid B) \, \mathbb{P}(B)}
+                  {\mathbb{P}(A)} > \frac{\mathbb{P}(A) \, \mathbb{P}(B)}
                   {\mathbb{P}(A)} = \mathbb{P}(B)
             \]
             So, we have $\mathbb{P}(B \mid A) > \mathbb{P}(B)$
       \item This tells us that the occurance of one event makes the other more 
             likely to happen. In laymen's terms, $A$ and $B$ are positively
-            linked, as they occur together more often.
+            linked, as they occur together more often. They reinforce each other.
 \end{enumerate}
 \end{solution}
 
